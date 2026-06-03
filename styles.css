@@ -1,3 +1,16 @@
+/* --- Page Layout --- */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    background: #f4f4f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Calculator Container --- */
 .calculator {
     background: #ffffff;
     padding: 20px;
@@ -5,15 +18,8 @@
     width: 320px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background: #f4f4f9;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+
+/* --- Display --- */
 .display {
     width: 100%;
     height: 60px;
@@ -24,14 +30,17 @@ body {
     margin-bottom: 16px;
     padding: 10px;
     background: #f1f3f4;
+    overflow-x: auto;
 }
 
+/* --- Button Grid --- */
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
+/* --- Buttons --- */
 button {
     height: 55px;
     border: none;
@@ -39,13 +48,16 @@ button {
     font-size: 18px;
     cursor: pointer;
     background: #f1f3f4;
-    transition: 0.1s;
+    transition: transform 0.1s, box-shadow 0.1s;
 }
 
+/* Click effect */
 button:active {
     transform: scale(0.95);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
+/* --- Special Buttons --- */
 .operator {
     background: #dadce0;
     font-weight: bold;
