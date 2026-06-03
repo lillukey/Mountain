@@ -11,31 +11,31 @@
         <input type="text" class="display" id="calc-screen" value="0" readonly tabindex="-1">
     
         <div class="buttons">
-            <!-- Top row -->
+            <!-- Row 1 -->
             <button class="clear" onclick="clearScreen()">C</button>
             <button class="operator" onclick="backspace()">⌫</button>
             <button class="operator" onclick="appendValue('/')">÷</button>
             <button class="operator" onclick="appendValue('*')">×</button>
-            <button class="operator" onclick="appendValue('-')">−</button>
-    
-            <!-- Numbers -->
+        
+            <!-- Row 2 -->
             <button onclick="appendValue('7')">7</button>
             <button onclick="appendValue('8')">8</button>
             <button onclick="appendValue('9')">9</button>
-            <button class="operator" onclick="appendValue('+')">+</button>
-    
+            <button class="operator" onclick="appendValue('-')">−</button>
+        
+            <!-- Row 3 -->
             <button onclick="appendValue('4')">4</button>
             <button onclick="appendValue('5')">5</button>
             <button onclick="appendValue('6')">6</button>
-    
-            <!-- Equals spans 2 rows -->
-            <button class="equals" onclick="calculateResult()">=</button>
-    
+            <button class="operator" onclick="appendValue('+')">+</button>
+        
+            <!-- Row 4 -->
             <button onclick="appendValue('1')">1</button>
             <button onclick="appendValue('2')">2</button>
             <button onclick="appendValue('3')">3</button>
-    
-            <!-- Bottom -->
+            <button class="equals" onclick="calculateResult()">=</button>
+        
+            <!-- Row 5 -->
             <button class="zero" onclick="appendValue('0')">0</button>
             <button onclick="appendValue('.')">.</button>
         </div>
