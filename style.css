@@ -92,6 +92,8 @@ button:active {
 
     display: flex;
     flex-direction: column-reverse; /* newest stays at bottom visually */
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
 }
 .history div {
     white-space: nowrap;     /* prevents wrapping */
