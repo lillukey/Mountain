@@ -13,7 +13,15 @@ function clearScreen() {
     currentExpression = "";
     screen.value = "0";
 }
+function backspace() {
+    currentExpression = currentExpression.slice(0, -1);
 
+    if (currentExpression === "") {
+        screen.value = "0";
+    } else {
+        screen.value = currentExpression;
+    }
+}
 function calculateResult() {
     if (currentExpression === "") return;
 
@@ -61,4 +69,53 @@ async function launchPage() {
     } catch (err) {
         console.error("Initialization failed.");
       }
+}
+document.addEventListener("keydown", (e) => {
+    const key = e.key;
+
+    // Numbers
+    if (!isNaN(key)) {
+        appendValue(key);
+    }
+
+    // Operators
+    else if (["+", "-", "*", "/"].includes(key)) {
+        appendValue(key);
+    }
+
+    // Decimal
+    else if (key === ".") {
+        appendValue(".");
+    }
+
+    // Enter = equals
+    else if (key === "Enter") {
+        e.preventDefault();
+        calculateResult();
+    }
+
+    // Backspace
+    else if (key === "Backspace") {
+        backspace();
+    }
+
+    // Escape = clear
+    else if (key === "Escape") {
+        clearScreen();
+    }
+});
+function appendValue(value) {
+    const lastChar = currentExpression.slice(-1);
+
+    if (['+', '*', '/', '-'].includes(lastChar) &&
+        ['+', '*', '/', '-'].includes(value)) {
+        return;
+    }
+
+    if (currentExpression === "" && ['+', '*', '/'].includes(value)) {
+        return;
+    }
+
+    currentExpression += value;
+    screen.value = currentExpression;
 }
