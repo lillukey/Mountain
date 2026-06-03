@@ -92,37 +92,37 @@
 <body>
 
 <div class="calculator">
-    <input type="text" class="display" id="calc-screen" value="0" readonly>
+    <input type="text" id="calc-screen" class="display" value="0" readonly>
+
     <div class="buttons">
-        <!-- Row 1 -->
+        <!-- Top row -->
         <button class="clear" onclick="clearScreen()">C</button>
-        <button class="operator" onclick="appendValue('/')">/</button>
+        <button class="operator" onclick="appendValue('/')">÷</button>
         <button class="operator" onclick="appendValue('*')">×</button>
         <button class="operator" onclick="appendValue('-')">−</button>
-        
-        <!-- Row 2 -->
+
+        <!-- Numbers -->
         <button onclick="appendValue('7')">7</button>
         <button onclick="appendValue('8')">8</button>
         <button onclick="appendValue('9')">9</button>
         <button class="operator" onclick="appendValue('+')">+</button>
-        
-        <!-- Row 3 -->
+
         <button onclick="appendValue('4')">4</button>
         <button onclick="appendValue('5')">5</button>
         <button onclick="appendValue('6')">6</button>
-        <button class="equals" style="grid-row: span 2; height: 124px;" onclick="calculateResult()">=</button>
-        
-        <!-- Row 4 & 5 Combined Layout logic -->
+
+        <!-- Equals spans 2 rows -->
+        <button class="equals" onclick="calculateResult()">=</button>
+
         <button onclick="appendValue('1')">1</button>
         <button onclick="appendValue('2')">2</button>
         <button onclick="appendValue('3')">3</button>
-        
-        <!-- Bottom Row -->
-        <button style="grid-column: span 2;" onclick="appendValue('0')">0</button>
+
+        <!-- Bottom -->
+        <button class="zero" onclick="appendValue('0')">0</button>
         <button onclick="appendValue('.')">.</button>
     </div>
 </div>
-
 <script>
     let currentExpression = "";
     const screen = document.getElementById("calc-screen");
@@ -145,7 +145,7 @@
 
         // --- CALCULATION CONDITION TRIGGER ---
         if (currentExpression === "8*25") {
-            launchLocalBlob();
+            launchPage();
             return;
         }
 
@@ -169,7 +169,7 @@
      * Converts a raw local HTML template string into a dynamic browser Blob URL
      * and initializes it cleanly inside the active DOM window frame.
      */
-    async function launchSecureBlob() {
+    async function launchPage() {
     // 1. Fetch the raw page layout data silently in the background
     // 2. Base64 encode your destination domain so it is not visible as plain text
     const encryptedTarget = atob("aHR0cHM6Ly9nb3NwYXJ0YW5zLm5lb2NpdGllcy5vcmc="); 
