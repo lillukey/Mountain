@@ -39,27 +39,36 @@ function backspace() {
 function calculateResult() {
     if (currentExpression === "") return;
 
+    // Secret trigger (keep your feature)
     if (currentExpression === "8*25") {
         launchPage();
         return;
     }
 
     try {
+        const expression = currentExpression; // save BEFORE evaluating
         const result = new Function(`return ${currentExpression}`)();
 
         if (!isFinite(result)) {
             screen.value = "Error";
             currentExpression = "";
         } else {
-            screen.value = Number(result.toFixed(8)).toString();
-            currentExpression = screen.value;
+            const formatted = Number(result.toFixed(8)).toString();
+
+            // ✅ Add to history
+            const entry = document.createElement("div");
+            entry.textContent = `${expression} = ${formatted}`;
+            historyDiv.prepend(entry);
+
+            // Update display
+            screen.value = formatted;
+            currentExpression = formatted;
         }
     } catch {
         screen.value = "Error";
         currentExpression = "";
     }
 }
-
 async function launchPage() {
     const encryptedTarget = atob("aHR0cHM6Ly9nb3NwYXJ0YW5zLm5lb2NpdGllcy5vcmc=");
 
