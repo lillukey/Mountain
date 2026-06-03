@@ -1,14 +1,6 @@
 let currentExpression = "";
 const screen = document.getElementById("calc-screen");
 
-function appendValue(value) {
-    if (currentExpression === "" && ['+', '*', '/'].includes(value)) {
-        return;
-    }
-    currentExpression += value;
-    screen.value = currentExpression;
-}
-
 function clearScreen() {
     currentExpression = "";
     screen.value = "0";
@@ -74,7 +66,7 @@ document.addEventListener("keydown", (e) => {
     const key = e.key;
 
     // Numbers
-    if (!isNaN(key)) {
+    if (/^[0-9]$/.test(key)) {
         appendValue(key);
     }
 
