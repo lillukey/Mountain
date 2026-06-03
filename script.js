@@ -4,19 +4,27 @@ const screen = document.getElementById("calc-screen");
 function appendValue(value) {
     const lastChar = currentExpression.slice(-1);
 
+    // Prevent double operators
     if (['+', '*', '/', '-'].includes(lastChar) &&
         ['+', '*', '/', '-'].includes(value)) {
         return;
     }
 
+    // Prevent starting with operator
     if (currentExpression === "" && ['+', '*', '/'].includes(value)) {
         return;
+    }
+
+    // Prevent multiple decimals in same number
+    if (value === ".") {
+        const parts = currentExpression.split(/[\+\-\*\/]/);
+        const lastNumber = parts[parts.length - 1];
+        if (lastNumber.includes(".")) return;
     }
 
     currentExpression += value;
     screen.value = currentExpression;
 }
-
 function clearScreen() {
     currentExpression = "";
     screen.value = "0";
