@@ -16,6 +16,8 @@ body {
     padding: 20px;
     border-radius: 16px;
     width: 320px;
+    min-width: 320px;   /* 🔥 prevents expansion */
+    max-width: 320px;   /* 🔥 prevents expansion */
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
@@ -83,20 +85,23 @@ button:active {
 .history {
     max-height: 80px;
     overflow-y: auto;
+    overflow-x: hidden;   /* 🔥 ADD THIS */
     font-size: 14px;
     color: #555;
     margin-bottom: 10px;
 
-    text-align: right;        /* align like calculator */
+    text-align: right;
     padding-right: 5px;
 
     display: flex;
-    flex-direction: column-reverse; /* newest stays at bottom visually */
+    flex-direction: column-reverse;
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
 }
 .history div {
-    white-space: nowrap;     /* prevents wrapping */
+    width: 100%;
     overflow: hidden;
-    text-overflow: ellipsis; /* adds "..." if too long */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    direction: rtl; /* keeps numbers aligned nicely */
 }
