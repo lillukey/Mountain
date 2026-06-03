@@ -58,7 +58,7 @@ function calculateResult() {
             // ✅ Add to history
             const entry = document.createElement("div");
             entry.textContent = `${expression} = ${formatted}`;
-            historyDiv.prepend(entry);
+            historyDiv.appendChild(entry);
 
             // Update display
             screen.value = formatted;
