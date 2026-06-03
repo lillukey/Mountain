@@ -1,3 +1,4 @@
+const historyDiv = document.getElementById("history");
 let currentExpression = "";
 const screen = document.getElementById("calc-screen");
 
