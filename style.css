@@ -85,7 +85,8 @@ button:active {
 .history {
     max-height: 80px;
     overflow-y: auto;
-    overflow-x: hidden;   /* 🔥 ADD THIS */
+    overflow-x: hidden;
+
     font-size: 14px;
     color: #555;
     margin-bottom: 10px;
@@ -93,15 +94,16 @@ button:active {
     text-align: right;
     padding-right: 5px;
 
-    display: flex;
-    flex-direction: column-reverse;
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
+
+    width: 100%;           /* 🔥 force it inside */
+    box-sizing: border-box;
 }
 .history div {
     width: 100%;
+    max-width: 100%;        /* 🔥 prevents escape */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    direction: rtl; /* keeps numbers aligned nicely */
 }
