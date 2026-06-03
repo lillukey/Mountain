@@ -64,7 +64,6 @@ button:active {
 }
 
 .equals {
-    grid-row: span 2;
     background: #1a73e8;
     color: white;
     font-weight: bold;
